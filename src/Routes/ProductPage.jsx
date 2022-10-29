@@ -5,14 +5,12 @@ import {Box,Image,Text,Spacer,Container,Center,Button,Flex} from "@chakra-ui/rea
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import { addToCart } from "../Context/CartContext/action";
 import { CartContext } from "../Context/CartContext/CartContextProvider";
+import Line from "../Components/Line"
 
 const getProductById = ({id})=>{
     return axios(`https://kirti123.herokuapp.com/data/${id}`)
    
 }
-
-
-
 
 export default function ProductPage(){
     const[State,setState] = useState({})
@@ -40,7 +38,10 @@ export default function ProductPage(){
        
     }
     return(
+        <>
+       {/* <Line/> */}
         <Container>
+       
         <Flex direction = {"row"}>
           
             <Center><Box w = "500px" mt = {10} ><Image width = "400px" src = {State.avatar} alt = "error"/></Box>
@@ -58,5 +59,6 @@ export default function ProductPage(){
            
         </Flex>
         </Container>
+        </>
     )
 }

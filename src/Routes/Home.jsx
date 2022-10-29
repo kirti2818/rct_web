@@ -6,8 +6,10 @@ import {productsuccess,productfailure} from "../Context/ProductsContext/actionCr
 import { ProductContext } from "../Context/ProductsContext/ProductContext"
 import {SimpleGrid,Box,Image,Heading,Text,Flex,Spacer,Container,Button,Center} from "@chakra-ui/react"
 import {Link} from "react-router-dom"
-import Footer from "./Footer"
-
+import Footer from "./Footer";
+import SlideShow  from "./slideshow"
+import { handleslideshow } from "./slideshow"
+import Line from "../Components/Line"
 
 
 const getAllProducts = ()=>{
@@ -20,6 +22,7 @@ export default function Home (){
     
     useEffect(()=>{
        handleFetchData()
+       handleslideshow()
     },[])
 
    
@@ -32,11 +35,17 @@ export default function Home (){
       }
       catch(err){
         console.log(err)
+        proDispatch(productfailure())
       }
     }
 
+    
+
     return (
       <Box>
+
+        <SlideShow/>
+        {/* <Line/> */}
        
        
         <SimpleGrid columns={[1,2,3]} ml = {20} spacing={3}>
@@ -52,10 +61,10 @@ export default function Home (){
                              </Box>
                              </Center>
                              <Center>
-                            <Link to = "/productPage"> <Text  mb = "5px">{user.Title}</Text></Link>
+                             <Link to = {`/productPage/${user.id}`} ><Text  mb = "5px">{user.Title}</Text></Link>
                              </Center>
                              <Center>
-                            <Link to = "/productPage"> <Box color = "green"><Text fontSize = {22} mb = "5px">☆{user.Rating}</Text></Box></Link>
+                             <Box color = "green"><Text fontSize = {22} mb = "5px">☆{user.Rating}</Text></Box>
                              </Center>
                             
                              <Center>

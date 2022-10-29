@@ -3,10 +3,15 @@ import {Image,SimpleGrid,Input,Heading,HStack,Text,Spacer,Box,Flex,Center,MenuBu
 import {ChevronDownIcon,Search, SearchIcon} from "@chakra-ui/icons"
 import {Link} from "react-router-dom"
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import ShopOutlinedIcon from '@mui/icons-material/ShopOutlined'; 
-import Footer from "../Routes/Footer"
+// import ShopOutlinedIcon from '@mui/icons-material/ShopOutlined'; 
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { useContext } from "react";
+import { CartContext } from "../Context/CartContext/CartContextProvider";
+import Line from "./Line";
+// import Footer from "../Routes/Footer"
 
 export default function Navbar(){
+    const { state, dispatch } = useContext(CartContext);
     return (
         <>
         <Flex boxShadow='lg' ml = {2} mt = {10} h = "100px">
@@ -30,32 +35,36 @@ export default function Navbar(){
 
         <Spacer/>
         <Box>
-        <NavLink to = "/signup"><Menu>
+        <NavLink><Menu>
   <MenuButton fontSize = "17px" bg = "rgb(255,255,255)"  as={Button} rightIcon={<ChevronDownIcon />}>
     Sign In
   </MenuButton>
   <MenuList>
-    <MenuItem>Sign In</MenuItem>
-    <MenuItem>Purchases</MenuItem>
-    <MenuItem>Cart</MenuItem>
+    <MenuItem><Link to = "/login">Sign In</Link></MenuItem>
+    <MenuItem><Link to = "/payment">Purchases</Link></MenuItem>
+    <MenuItem><Link to = "/cart">Cart</Link></MenuItem>
   </MenuList>
 </Menu></NavLink>
 </Box>
 <Spacer/>
 <Box>
 <HStack>
+
     <LocalMallOutlinedIcon fontSize="large"/>
+    
+    <Box w = "20px" color = "white" bg = "black" mb = "25px"><Center>{state.length}</Center></Box>
         <NavLink to = "/cart"><Text fontSize='lg'>Purchases</Text></NavLink>
+        
         </HStack>
         </Box>
         <Spacer/>
         <Center>
-        <Box mb = {12} > <NavLink to = "/payment"><ShopOutlinedIcon fontSize="large"/></NavLink></Box>
+        <Box mb = "50px"> <NavLink to = "/payment"><ShoppingBagIcon fontSize="large"/></NavLink></Box>
         </Center>
         <Spacer/>
 
         </Flex>
-      
+      {/* <Line/> */}
         <Center>
         <Box bg = "gray.400" mb = {4}  border = "1px" borderColor = "gray.400" width = "1100px"> 
         </Box>

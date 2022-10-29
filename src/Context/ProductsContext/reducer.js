@@ -10,7 +10,7 @@ export default function ProductReducer(state,action){
                 return {
                     ...state,
                     data : [],
-                    loading : true
+                    loading : false
                 }
                 default : return state;
     }

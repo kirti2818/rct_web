@@ -5,6 +5,7 @@ import {productsuccess,productfailure} from "../Context/ProductsContext/actionCr
 import { ProductContext } from "../Context/ProductsContext/ProductContext"
 import {SimpleGrid,Box,Image,Heading,Text,Flex,Spacer,Container,Button,Center} from "@chakra-ui/react"
 import {Link} from "react-router-dom"
+import Line from "../Components/Line"
 
 const getWomenProducts = ()=>{
     return axios("https://kirti123.herokuapp.com/data?type=kids")
@@ -25,6 +26,7 @@ export default function Kids(){
       }
       catch(err){
         console.log(err)
+        proDispatch(productfailure())
       }
     }
     useEffect(()=>{
@@ -35,7 +37,8 @@ export default function Kids(){
     },[])
     return (
        <Box>
-        <SimpleGrid columns={[1,2,3]} spacing={[3,2,1]}>
+        {/* <Line/> */}
+        <SimpleGrid columns={[1,2,3]} ml = {20} spacing={[3,2,1]}>
         {
             proState.data && proState.data.map((user)=>{
                 return(
@@ -47,11 +50,15 @@ export default function Kids(){
                              </Box>
                              </Center>
                              <Center>
-                             <Text mb = "5px">{user.Title}</Text>
+                             <Link to = {`/productPage/${user.id}`} ><Text  mb = "5px">{user.Title}</Text></Link>
+                             </Center>
+                             <Center>
+                             <Box color = "green"><Text fontSize = {22} mb = "5px">☆{user.Rating}</Text></Box>
                              </Center>
                              <Center>
                              <Heading mb = "5px"  size = "md">INR {user.Price}</Heading>
                              </Center>
+                             
                             
                         </Box>
                     
